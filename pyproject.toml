@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "omp"
+version = "0.0.1"
+description = "org mode present"
+readme = "README.md"
+urls = { code = "https://github.com/yuzumone/omp" }
+dependencies = [
+    "Mastodon.py",
+    "click",
+    "beautifulsoup4",
+]
+requires-python = ">=3.9"
+
+[project.optional-dependencies]
+formatter = [
+    "isort",
+    "black",
+    "flake8",
+]
+dev = [
+    "tox",
+    "mypy",
+    "types-beautifulsoup4",
+]
+
+[project.scripts]
+omp = "omp.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+exclude = [
+    "tests",
+]
+
+[tool.mypy]
+strict = true
+
+[[tool.mypy.overrides]]
+module = ["mastodon"]
+ignore_missing_imports = true
+
+[tool.black]
+line-length = 160
