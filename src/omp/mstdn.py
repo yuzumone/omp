@@ -24,8 +24,10 @@ def mstdn(base_url: str, client_id: str, client_secret: str, access_token: str, 
     statuses = mastodon.account_statuses(me.id, limit=50)
     end_date = date + datetime.timedelta(days=1)
     targets = [x for x in statuses if date.astimezone() < x.created_at.astimezone() and x.created_at.astimezone() < end_date.astimezone()]
+    if not targets:
+        return
     body = [f"* {date.strftime('%A, %d %B %Y')}"]
-    for x in targets:
+    for x in targets.reversed():
         tmp = [
             f"** {x.created_at.astimezone().strftime('%H:%M')}",
             f""":PROPERTIES:
