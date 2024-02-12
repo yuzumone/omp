@@ -27,7 +27,7 @@ def mstdn(base_url: str, client_id: str, client_secret: str, access_token: str, 
     if not targets:
         return
     body = [f"* {date.strftime('%A, %d %B %Y')}"]
-    for x in targets.reversed():
+    for x in reversed(targets):
         tmp = [
             f"** {x.created_at.astimezone().strftime('%H:%M')}",
             f""":PROPERTIES:
